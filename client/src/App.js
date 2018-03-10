@@ -10,7 +10,7 @@ class App extends Component {
 		formdata: {
 			name: '',
 			description: '',
-			value: null
+			value: ''
 		},
 		total: 0
 	};
@@ -27,7 +27,7 @@ class App extends Component {
 	};
 
 	getTotal = () => {
-		let sum = null;
+		let sum = 0;
 		this.state.expenses.forEach(item => {
 			sum += item.value;
 		});
@@ -61,7 +61,7 @@ class App extends Component {
 				formdata: {
 					name: '',
 					description: '',
-					value: null
+					value: ''
 				}
 			});
 			this.getAllExpenses();
