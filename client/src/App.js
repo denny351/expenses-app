@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { TransitionGroup } from 'react-transition-group';
 
 
 import ExpensesList from './components/expensesList';
@@ -13,7 +12,7 @@ class App extends Component {
 			description: '',
 			value: null
 		},
-		total: null
+		total: 0
 	};
 
 	componentDidMount() {
@@ -32,8 +31,9 @@ class App extends Component {
 		this.state.expenses.forEach(item => {
 			sum += item.value;
 		});
-		this.setState({ total: sum });
-	};
+		this.setState({ total: sum.toFixed(2) });
+  };
+
 
 	searchHandler = e => {
 		const searchInput = e.target.value;
@@ -78,7 +78,7 @@ class App extends Component {
 				<form className="newForm" onSubmit={this.submitForm}>
 					<input type="text" className="nameInput" placeholder="Name" value={this.state.formdata.name} onChange={event => this.handleFormInput(event, 'name')} required />
 					<input type="text" className="descriptionInput" placeholder="Description" value={this.state.formdata.description} onChange={event => this.handleFormInput(event, 'description')} />
-					<input type="number" className="numberInput" placeholder="Price" value={this.state.formdata.value} onChange={event => this.handleFormInput(event, 'value')} required />
+					<input type="number" step="0.01" className="numberInput" placeholder="Price" value={this.state.formdata.value} onChange={event => this.handleFormInput(event, 'value')} required />
 					<span>
 						<button type="submit">Add</button>
 					</span>
