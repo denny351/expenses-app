@@ -5,7 +5,12 @@ import ExpensesList from './components/expensesList';
 
 class App extends Component {
 	state = {
-		expenses: []
+		expenses: [],
+		formdata: {
+			name: '',
+			description: '',
+			value: null
+		}
 	};
 
 	componentDidMount() {
@@ -27,24 +32,54 @@ class App extends Component {
 				this.setState({ expenses: res.data });
 			});
 		}
-  };
+	};
+
+	handleInput = (event, name) => {
+		const newFormData = {
+			...this.state.formdata
+		};
+		newFormData[name] = event.target.value;
+		this.setState({ formdata: newFormData });
+	};
+
+	submitForm = e => {
+		e.preventDefault();
+		axios.post('/api/expenses', this.state.formdata).then(() => {
+			this.getAllExpenses();
+		});
+	};
 
 	render() {
 		return (
 			<div className="appContainer">
 				<h1>Expense Tracker</h1>
+
 				<input
 					className="search"
 					onKeyUp={this.searchHandler}
 					type="text"
 					placeholder="Search here"
 				/>
+
 				<form className="newForm" onSubmit={this.submitForm}>
-					<input type="text" placeholder="Name" />
-					<input type="text" placeholder="Description" />
-					<input type="number" placeholder="Price" />
+					<input
+						type="text"
+						placeholder="Name"
+						onChange={event => this.handleInput(event, 'name')}
+					/>
+					<input
+						type="text"
+						placeholder="Description"
+						onChange={event => this.handleInput(event, 'description')}
+					/>
+					<input
+						type="number"
+						placeholder="Price"
+						onChange={event => this.handleInput(event, 'value')}
+					/>
 					<button type="submit">Add</button>
 				</form>
+
 				<ExpensesList expenses={this.state.expenses} />
 			</div>
 		);
