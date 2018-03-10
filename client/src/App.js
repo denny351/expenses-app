@@ -27,11 +27,9 @@ class App extends Component {
 
 	getTotal = () => {
 		let sum = null;
-
 		this.state.expenses.forEach(item => {
 			sum += item.value;
 		});
-
 		this.setState({ total: sum });
 	};
 

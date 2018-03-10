@@ -1,24 +1,26 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = (knex) => {
-
-  router.post('/', (req, res) => {
-    const entryData = {
-      name: req.body.name,
-      description: req.body.description,
-      value: req.body.value
-    }
-    knex('expenses').insert(entryData).then(() => {
-      res.sendStatus(200)
-    })
-  })
+module.exports = knex => {
+	router.post('/', (req, res) => {
+		const entryData = {
+			name: req.body.name,
+			description: req.body.description,
+			value: req.body.value
+		};
+		knex('expenses')
+			.insert(entryData)
+			.then(() => {
+				res.sendStatus(200);
+			});
+	});
 
 	router.get('/', (req, res) => {
 		if (req.query.search) {
 			knex('expenses')
 				.where(function() {
-					this.where('name', 'ilike', `%${req.query.search}%`).orWhere('description', 'ilike', `%${req.query.search}%`);
+          this.where('name', 'ilike', `%${req.query.search}%`)
+            .orWhere('description', 'ilike', `%${req.query.search}%`);
 				})
 				.select()
 				.then(doc => {
@@ -31,16 +33,16 @@ module.exports = (knex) => {
 					res.json(doc);
 				});
 		}
+	});
+
+	router.delete('/:id', (req, res) => {
+		knex('expenses')
+			.where('id', req.params.id)
+			.del()
+			.then(() => {
+				res.json(true);
+			});
   });
   
-  router.delete('/:id', (req,res) => {
-      knex('expenses')
-				.where('id', req.params.id)
-				.del()
-				.then(() => {
-					res.json(true);
-				});
-  })
-
-  return router;
-}
+	return router;
+};
