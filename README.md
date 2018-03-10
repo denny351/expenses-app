@@ -16,19 +16,21 @@ The main technologies used in this app:
 
 First create a psql database called "expenses"
 
-Clone the repository and install all the dependencies
+Clone the repository, install all the dependencies, then knex and nodemon must also be installed globally.
 ```sh
 $ git clone
 $ cd expenses-app/client
 $ npm install
 $ cd ..
 $ npm install
+$ npm install -g knex nodemon
 ```
 
+
 Next migrate from the root folder from knex and then start the app
-```
-knex migrate:latest
-npm run dev
+```sh
+$ knex migrate:latest
+$ npm run dev
 ```
 
 Finally visit [http://localhost:3000](http://localhost:3000) if not opened automatically
