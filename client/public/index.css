@@ -72,9 +72,11 @@ button {
 
 .fade-exit {
   opacity: 1;
+  transform: translateX(0)
 }
 
 .fade-exit.fade-exit-active {
-  opacity: 0.01;
-  transition: opacity 400ms ease-in;
+  opacity: 0;
+  transform: translateX(50%);
+  transition: all 100ms ease-in;
 }
