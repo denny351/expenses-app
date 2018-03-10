@@ -34,7 +34,7 @@ class App extends Component {
 		}
 	};
 
-	handleInput = (event, name) => {
+	handleFormInput = (event, name) => {
 		const newFormData = {
 			...this.state.formdata
 		};
@@ -58,26 +58,32 @@ class App extends Component {
 					className="search"
 					onKeyUp={this.searchHandler}
 					type="text"
-					placeholder="Search here"
+					placeholder="Search for an expense"
 				/>
 
+        <p style={{margin: 0}}>Add a new expense</p>
 				<form className="newForm" onSubmit={this.submitForm}>
 					<input
-						type="text"
+            type="text"
+            className="nameInput"
 						placeholder="Name"
-						onChange={event => this.handleInput(event, 'name')}
+						onChange={event => this.handleFormInput(event, 'name')}
 					/>
 					<input
-						type="text"
+            type="text"
+            className="descriptionInput"
 						placeholder="Description"
-						onChange={event => this.handleInput(event, 'description')}
+						onChange={event => this.handleFormInput(event, 'description')}
 					/>
 					<input
-						type="number"
+            type="number"
+            className="numberInput"
 						placeholder="Price"
-						onChange={event => this.handleInput(event, 'value')}
+						onChange={event => this.handleFormInput(event, 'value')}
 					/>
-					<button type="submit">Add</button>
+					<span>
+						<button type="submit">Add</button>
+					</span>
 				</form>
 
 				<ExpensesList expenses={this.state.expenses} />

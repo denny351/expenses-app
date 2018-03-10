@@ -1,0 +1,51 @@
+.appContainer {
+  margin: auto;
+  width: 400px;
+}
+
+.appContainer h1 {
+  text-align: center;
+}
+
+.search {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.newForm {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.newForm input {
+  width: 144px;
+  margin-right: 2px;
+}
+
+.newForm .numberInput {
+  width: 50px;
+}
+
+.newForm button {
+  width: 38px;
+  background: #cfcfcf;
+  transition: all 0.2s; 
+}
+
+.newForm button:hover {
+  background: #a6a5a5
+}
+
+.expenseItem {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.expenseItem .expenseItemHead {
+  font-size: 1.1em;
+}
+
+.expenseItem .expenseDescription {
+  margin: 5px;
+}
