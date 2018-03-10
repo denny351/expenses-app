@@ -14,11 +14,24 @@ module.exports = (knex) => {
     })
   })
 
-  router.get('/', (req, res) => {
-    knex('expenses').select().then(doc => {
-      res.json(doc)
-    })
-  })
+	router.get('/', (req, res) => {
+		if (req.query.search) {
+			knex('expenses')
+				.where(function() {
+					this.where('name', 'ilike', `%${req.query.search}%`).orWhere('description', 'ilike', `%${req.query.search}%`);
+				})
+				.select()
+				.then(doc => {
+					res.json(doc);
+				});
+		} else {
+			knex('expenses')
+				.select()
+				.then(doc => {
+					res.json(doc);
+				});
+		}
+	});
 
   return router;
 }
