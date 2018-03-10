@@ -1,3 +1,9 @@
+/* Global */
+button {
+  cursor: pointer;
+}
+
+/* App */
 .appContainer {
   margin: auto;
   width: 400px;
@@ -29,13 +35,14 @@
 .newForm button {
   width: 38px;
   background: #cfcfcf;
-  transition: all 0.2s; 
+  transition: all 0.2s;
 }
 
 .newForm button:hover {
   background: #a6a5a5
 }
 
+/* Expense List */
 .expenseItem {
   width: 100%;
   padding: 5px;
