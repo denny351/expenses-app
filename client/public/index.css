@@ -49,6 +49,10 @@ button {
   border: 1px solid black;
 }
 
+.expenseItem:hover {
+  background: grey;
+}
+
 .expenseItem .expenseItemHead {
   font-size: 1.1em;
 }

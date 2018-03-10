@@ -67,48 +67,23 @@ class App extends Component {
   };
 
 	render() {
-		return (
-			<div className="appContainer">
+		return <div className="appContainer">
 				<h1>Expense Tracker</h1>
 				<h4>Total value so far: ${this.state.total}</h4>
-				<input
-					className="search"
-					onKeyUp={this.searchHandler}
-					type="text"
-					placeholder="Search for an expense"
-				/>
+				<input className="search" onKeyUp={this.searchHandler} type="text" placeholder="Search for an expense" />
 
 				<p style={{ margin: 0 }}>Add a new expense</p>
 				<form className="newForm" onSubmit={this.submitForm}>
-					<input
-						type="text"
-						className="nameInput"
-            placeholder="Name"
-            value={this.state.formdata.name}
-						onChange={event => this.handleFormInput(event, 'name')}
-					/>
-					<input
-						type="text"
-						className="descriptionInput"
-            placeholder="Description"
-            value={this.state.formdata.description}
-						onChange={event => this.handleFormInput(event, 'description')}
-					/>
-					<input
-						type="number"
-						className="numberInput"
-            placeholder="Price"
-            value={this.state.formdata.value}
-						onChange={event => this.handleFormInput(event, 'value')}
-					/>
+					<input type="text" className="nameInput" placeholder="Name" value={this.state.formdata.name} onChange={event => this.handleFormInput(event, 'name')} required />
+					<input type="text" className="descriptionInput" placeholder="Description" value={this.state.formdata.description} onChange={event => this.handleFormInput(event, 'description')} />
+					<input type="number" className="numberInput" placeholder="Price" value={this.state.formdata.value} onChange={event => this.handleFormInput(event, 'value')} required />
 					<span>
 						<button type="submit">Add</button>
 					</span>
 				</form>
 
-				<ExpensesList expenses={this.state.expenses} getAll={this.getAllExpenses}/>
-			</div>
-		);
+				<ExpensesList expenses={this.state.expenses} getAll={this.getAllExpenses} />
+			</div>;
 	}
 }
 
