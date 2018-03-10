@@ -10,28 +10,30 @@ class App extends Component {
 			name: '',
 			description: '',
 			value: null
-		}
+    },
+    total: null
 	};
 
 	componentDidMount() {
-		this.getAllExpenses();
+    this.getAllExpenses();
 	}
 
 	getAllExpenses = () => {
 		axios.get('/api/expenses').then(res => {
-			this.setState({ expenses: res.data });
-		});
+      this.setState({ expenses: res.data });
+      this.getTotal();
+    });
 	};
 
 	searchHandler = e => {
 		const searchInput = e.target.value;
 		if (searchInput === '') {
-			this.getAllExpenses();
+      this.getAllExpenses();
 		} else {
 			axios.get(`/api/expenses?search=${searchInput}`).then(res => {
-				this.setState({ expenses: res.data });
+        this.setState({ expenses: res.data });
 			});
-		}
+    }
 	};
 
 	handleFormInput = (event, name) => {
@@ -47,13 +49,24 @@ class App extends Component {
 		axios.post('/api/expenses', this.state.formdata).then(() => {
 			this.getAllExpenses();
 		});
-	};
+  };
+  
+  getTotal = () => {
+    let sum = null;
+
+    this.state.expenses.forEach(item => {
+      sum += item.value
+    })
+
+    this.setState({total: sum})
+  }
 
 	render() {
+
 		return (
 			<div className="appContainer">
 				<h1>Expense Tracker</h1>
-
+        <h4>Total value so far: ${this.state.total}</h4>
 				<input
 					className="search"
 					onKeyUp={this.searchHandler}

@@ -3,7 +3,7 @@
   width: 400px;
 }
 
-.appContainer h1 {
+.appContainer h1, .appContainer h4 {
   text-align: center;
 }
 
