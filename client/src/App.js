@@ -31,7 +31,7 @@ class App extends Component {
 		this.state.expenses.forEach(item => {
 			sum += item.value;
 		});
-		this.setState({ total: sum.toFixed(2) });
+		this.setState({ total: sum });
   };
 
 
@@ -71,7 +71,7 @@ class App extends Component {
 	render() {
 		return <div className="appContainer">
 				<h1>Expense Tracker</h1>
-				<h4>Total value so far: ${this.state.total}</h4>
+				<h4>Total value so far: ${this.state.total.toFixed(2)}</h4>
 				<input className="search" onKeyUp={this.searchHandler} type="text" placeholder="Search for an expense" />
 
 				<p style={{ margin: 0 }}>Add a new expense</p>
