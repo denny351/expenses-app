@@ -6,6 +6,11 @@ const bodyParser = require('body-parser');
 const knexConfig = require('../knexfile')[ENV];
 const knex = require('knex')(knexConfig);
 
+app.use(bodyParser.json());
+
+const entriesRoutes = require('./routes/entries');
+
+app.use("/api/entries", entriesRoutes(knex));
 
 
 
