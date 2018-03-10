@@ -10,30 +10,40 @@ class App extends Component {
 			name: '',
 			description: '',
 			value: null
-    },
-    total: null
+		},
+		total: null
 	};
 
 	componentDidMount() {
-    this.getAllExpenses();
+		this.getAllExpenses();
 	}
 
 	getAllExpenses = () => {
 		axios.get('/api/expenses').then(res => {
-      this.setState({ expenses: res.data });
-      this.getTotal();
-    });
+			this.setState({ expenses: res.data });
+			this.getTotal();
+		});
+	};
+
+	getTotal = () => {
+		let sum = null;
+
+		this.state.expenses.forEach(item => {
+			sum += item.value;
+		});
+
+		this.setState({ total: sum });
 	};
 
 	searchHandler = e => {
 		const searchInput = e.target.value;
 		if (searchInput === '') {
-      this.getAllExpenses();
+			this.getAllExpenses();
 		} else {
 			axios.get(`/api/expenses?search=${searchInput}`).then(res => {
-        this.setState({ expenses: res.data });
+				this.setState({ expenses: res.data });
 			});
-    }
+		}
 	};
 
 	handleFormInput = (event, name) => {
@@ -50,23 +60,12 @@ class App extends Component {
 			this.getAllExpenses();
 		});
   };
-  
-  getTotal = () => {
-    let sum = null;
-
-    this.state.expenses.forEach(item => {
-      sum += item.value
-    })
-
-    this.setState({total: sum})
-  }
 
 	render() {
-
 		return (
 			<div className="appContainer">
 				<h1>Expense Tracker</h1>
-        <h4>Total value so far: ${this.state.total}</h4>
+				<h4>Total value so far: ${this.state.total}</h4>
 				<input
 					className="search"
 					onKeyUp={this.searchHandler}
@@ -74,23 +73,23 @@ class App extends Component {
 					placeholder="Search for an expense"
 				/>
 
-        <p style={{margin: 0}}>Add a new expense</p>
+				<p style={{ margin: 0 }}>Add a new expense</p>
 				<form className="newForm" onSubmit={this.submitForm}>
 					<input
-            type="text"
-            className="nameInput"
+						type="text"
+						className="nameInput"
 						placeholder="Name"
 						onChange={event => this.handleFormInput(event, 'name')}
 					/>
 					<input
-            type="text"
-            className="descriptionInput"
+						type="text"
+						className="descriptionInput"
 						placeholder="Description"
 						onChange={event => this.handleFormInput(event, 'description')}
 					/>
 					<input
-            type="number"
-            className="numberInput"
+						type="number"
+						className="numberInput"
 						placeholder="Price"
 						onChange={event => this.handleFormInput(event, 'value')}
 					/>
@@ -99,7 +98,7 @@ class App extends Component {
 					</span>
 				</form>
 
-				<ExpensesList expenses={this.state.expenses} />
+				<ExpensesList expenses={this.state.expenses} getAll={this.getAllExpenses}/>
 			</div>
 		);
 	}

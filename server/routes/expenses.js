@@ -31,7 +31,16 @@ module.exports = (knex) => {
 					res.json(doc);
 				});
 		}
-	});
+  });
+  
+  router.delete('/:id', (req,res) => {
+      knex('expenses')
+				.where('id', req.params.id)
+				.del()
+				.then(() => {
+					res.json(true);
+				});
+  })
 
   return router;
 }
