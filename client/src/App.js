@@ -55,6 +55,13 @@ class App extends Component {
 	submitForm = e => {
 		e.preventDefault();
 		axios.post('/api/expenses', this.state.formdata).then(() => {
+      this.setState({
+				formdata: {
+					name: '',
+					description: '',
+					value: null
+				}
+			});
 			this.getAllExpenses();
 		});
   };
@@ -76,19 +83,22 @@ class App extends Component {
 					<input
 						type="text"
 						className="nameInput"
-						placeholder="Name"
+            placeholder="Name"
+            value={this.state.formdata.name}
 						onChange={event => this.handleFormInput(event, 'name')}
 					/>
 					<input
 						type="text"
 						className="descriptionInput"
-						placeholder="Description"
+            placeholder="Description"
+            value={this.state.formdata.description}
 						onChange={event => this.handleFormInput(event, 'description')}
 					/>
 					<input
 						type="number"
 						className="numberInput"
-						placeholder="Price"
+            placeholder="Price"
+            value={this.state.formdata.value}
 						onChange={event => this.handleFormInput(event, 'value')}
 					/>
 					<span>
