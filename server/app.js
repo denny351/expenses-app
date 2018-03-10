@@ -8,9 +8,9 @@ const knex = require('knex')(knexConfig);
 
 app.use(bodyParser.json());
 
-const entriesRoutes = require('./routes/entries');
+const expensesRoutes = require('./routes/expenses');
 
-app.use("/api/entries", entriesRoutes(knex));
+app.use("/api/expenses", expensesRoutes(knex));
 
 
 
